@@ -1,0 +1,7 @@
+#preact_root * {
+    box-sizing: border-box;
+}
+
+#preact_root {
+    padding: 0 10px;
+}

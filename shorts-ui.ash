@@ -9,7 +9,16 @@ void handle_shorts_ui(buffer page_text) {
     m_body.find();
     string body_snippet = m_body.group(1);
 
+    // Separate out the script block so it doesn't block rendering of the whole page.
+    matcher m_scripts = create_matcher("<script.*</script>", body_snippet);
+    m_scripts.find();
+    string script_snippet = m_scripts.group();
+    body_snippet = m_scripts.replace_first("");
+
     page_text.replace_string("</head>", `{head_snippet}</head>`);
-    page_text.replace_string("</body>", `{body_snippet}</body>`);
+    page_text.replace_string("</body>", `{script_snippet}</body>`);
+    matcher m = create_matcher("<small>\\(or pick a pocket below\\)</small>", page_text);
+    m.find();
+    page_text.insert(m.end(), body_snippet);
     write(page_text);
 }
