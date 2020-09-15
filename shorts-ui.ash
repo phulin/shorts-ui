@@ -33,12 +33,13 @@ void handle_shorts_ui(buffer page_text) {
         matcher m_which = create_matcher("Reach into pocket.*</small>", page_text);
         m_which.find();
         page_text.replace(m_which.start(), m_which.end(), "You've already opened a pocket today.");
-    } else {
-        page_text.replace_string("</head>", `{head_snippet}</head>`);
-        page_text.replace_string("</body>", `{script_snippet}</body>`);
-        matcher m = create_matcher("<small>\\(or pick a pocket below\\)</small>", page_text);
-        m.find();
-        page_text.insert(m.end(), body_snippet);
     }
+
+    page_text.replace_string("</head>", `{head_snippet}</head>`);
+    page_text.replace_string("</body>", `{script_snippet}</body>`);
+    matcher m = create_matcher("<small>\\(or pick a pocket below\\)</small>", page_text);
+    m.find();
+    page_text.insert(m.end(), body_snippet);
+
     write(page_text);
 }
