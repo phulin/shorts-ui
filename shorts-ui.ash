@@ -28,18 +28,18 @@ void handle_shorts_ui(buffer page_text) {
         page_text.replace(m_pockets.start(1), m_pockets.end(1), opened);
     }
 
-    if (get_property("_cargoPocketEmptied") == "true") {
-        // Grey out buttons.
-        matcher m_which = create_matcher("Reach into pocket.*</small>", page_text);
-        m_which.find();
-        page_text.replace(m_which.start(), m_which.end(), "You've already opened a pocket today.");
-    }
-
     page_text.replace_string("</head>", `{head_snippet}</head>`);
     page_text.replace_string("</body>", `{script_snippet}</body>`);
     matcher m = create_matcher("<small>\\(or pick a pocket below\\)</small>", page_text);
     m.find();
     page_text.insert(m.end(), body_snippet);
+
+    if (get_property("_cargoPocketEmptied") == "true") {
+        // Grey out buttons.
+        matcher m_which = create_matcher("Reach into pocket.*\\(or pick a pocket below\\)</small>", page_text);
+        m_which.find();
+        page_text.replace(m_which.start(), m_which.end(), "You've already opened a pocket today.");
+    }
 
     write(page_text);
 }
