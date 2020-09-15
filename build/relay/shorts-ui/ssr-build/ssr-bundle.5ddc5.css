@@ -22,7 +22,7 @@
     margin-top: 0.5rem;
 }
 
-.btn__3gMuj:hover {
+.btn__3gMuj:hover:not(:disabled) {
     background-color: #bbb;
 }
 
@@ -38,6 +38,9 @@
 
 .btn__3gMuj small {
     font-weight: normal;
+}
+
+.btn__3gMuj:not(:disabled) small {
     color: #444;
 }
 .col__2hsS8 {
@@ -62,4 +65,4 @@ h3 {
     margin-bottom: 0;
 }
 
-/*# sourceMappingURL=ssr-bundle.73be8.css.map*/
+/*# sourceMappingURL=ssr-bundle.5ddc5.css.map*/

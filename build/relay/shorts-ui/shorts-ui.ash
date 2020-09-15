@@ -1,4 +1,4 @@
-string[int] properties = {};
+string[int] properties = { "cargoPocketsEmptied" };
 
 void handle_shorts_ui(buffer page_text) {
     buffer index_html = file_to_buffer("relay/shorts-ui/index.html");
