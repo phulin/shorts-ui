@@ -2,6 +2,7 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 export default (config) => {
     config.output.publicPath = '/shorts-ui';
+    config.externals = { ...config.externals, ashProperties: 'ashProperties' };
     config.plugins.push(
         new CopyWebpackPlugin([
             {

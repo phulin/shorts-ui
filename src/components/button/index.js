@@ -10,15 +10,21 @@ const handlePocket = (event) => {
 	form.submit();
 }
 
-const Button = ({ pocket, image, title, subtitle }) => (
-	<button onClick={handlePocket} data-pocket={pocket} class={style.btn}>
-		<img src={image} />
-		<div>
-			{title}
-			<br />
-			{subtitle && subtitle.length > 0 ? <small>{subtitle}</small> : false}
-		</div>
-	</button>
-);
+const Button = ({ pocket, image, title, subtitle }) => {
+	let pockets = [];
+	if (typeof ashProperties !== 'undefined') {
+		pockets = ashProperties.cargoPocketsEmptied.split(',').map((p) => parseInt(p, 10));
+	}
+	return (
+		<button onClick={handlePocket} data-pocket={pocket} title={`Pocket ${pocket}`} disabled={pockets.includes(pocket)} class={style.btn}>
+			<img src={image} />
+			<div>
+				{title}
+				<br />
+				{subtitle && subtitle.length > 0 ? <small>{subtitle}</small> : false}
+			</div>
+		</button>
+	);
+};
 
 export default Button;
