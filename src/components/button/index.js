@@ -7,7 +7,7 @@ const handlePocket = (event) => {
 	const form = target.closest('form');
 	const pocket = target.getAttribute('data-pocket')
 	form.elements.pocket.value = pocket;
-	// form.submit();
+	form.submit();
 }
 
 const Button = ({ pocket, image, title, subtitle }) => (
