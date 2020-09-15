@@ -29,7 +29,7 @@ const buffPockets = [
 	['Filthworm Drone Stench', 'Skip 2 worms', 343, '/images/itemimages/stench.gif'],
 	['Alarm clock', 'Tomorrow, +666% stats', 121, '/images/itemimages/yeg_blessing.gif'],
 	['Hand soap', '+200% spell damage', 177, '/images/itemimages/yeg_sigils.gif'],
-	['Medieval Mage Mayhem', '+100% weapon/spell damage', 177, '/images/itemimages/swords.gif'],
+	['Medieval Mage Mayhem', '+100% weapon/spell damage', 617, '/images/itemimages/swords.gif'],
 	['Barely Visible', '-10% combat', 347, '/images/itemimages/pocket.gif'],
 	['Very Attractive', '+10% combat', 53, '/images/itemimages/louder.gif'],
 ];
