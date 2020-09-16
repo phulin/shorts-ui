@@ -1,6 +1,18 @@
 string[int] properties = { "cargoPocketsEmptied" };
 
 void handle_shorts_ui(buffer page_text) {
+    if (get_property("shorts_devMode") == "true") {
+        string snippet = '<script defer src="/shorts-ui/bundle.js"></script><script nomodule src="/shorts-ui/polyfills.js"></script>';
+        page_text.replace_string("</body>", `{snippet}</body>`);
+
+        matcher m = create_matcher("<small>\\(or pick a pocket below\\)</small>", page_text);
+        m.find();
+        page_text.insert(m.end(), '<div id="preact_root" />');
+
+        write(page_text);
+        return;
+    }
+
     buffer index_html = file_to_buffer("relay/shorts-ui/index.html");
 
     matcher m_head = create_matcher("<head>(.*)</head>", index_html);
