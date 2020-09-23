@@ -22,7 +22,7 @@
     margin-top: 0.5rem;
 }
 
-.btn-hoverable__36EP2:hover {
+.btn__3gMuj:not(:disabled):hover {
     background-color: #bbb;
 }
 
@@ -40,8 +40,12 @@
     font-weight: normal;
 }
 
-.btn__3gMuj:not(:disabled) small {
+.btn__3gMuj:not(.btn-grey__1nva7):disabled {
     color: #444;
+}
+
+.btn-grey__1nva7 {
+    color: #aaa;
 }
 .col__2hsS8 {
     display: -ms-flexbox;
@@ -65,4 +69,4 @@ h3 {
     margin-bottom: 0;
 }
 
-/*# sourceMappingURL=ssr-bundle.2c511.css.map*/
+/*# sourceMappingURL=ssr-bundle.2cb67.css.map*/
