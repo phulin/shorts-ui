@@ -22,13 +22,13 @@ void handle_shorts_ui(buffer page_text) {
         // Separate out the script block so it doesn't block rendering of the whole page.
         matcher m_scripts = create_matcher("<script.*</script>", body_snippet);
         m_scripts.find();
-        string script_snippet = m_scripts.group();
+        script_snippet = m_scripts.group();
         body_snippet = m_scripts.replace_first("");
     }
 
     string[string] property_values;
     foreach i, prop in properties property_values[prop] = get_property(prop);
-    script_snippet += `<script type="text/javascript">var ashProperties = {property_values.to_json()};</script>`;
+    script_snippet += `<script type="text/javascript">var globalAshProperties = {property_values.to_json()};</script>`;
 
     matcher m_pockets = create_matcher("You've already opened ([0-9]+ of them)", page_text);
     if (m_pockets.find()) {

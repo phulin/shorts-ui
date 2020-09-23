@@ -1,6 +1,8 @@
 import { h } from 'preact';
+import { useEffect, useState } from 'preact/hooks';
 
 import ButtonRow from './button-row';
+import PropertiesContext from './properties-context';
 
 const statPockets = [
 	['+250 muscle substats', '', 161, '/images/itemimages/strboost.gif'],
@@ -53,15 +55,22 @@ const chessPockets = [
 	['Alabaster king', '', 523, '/images/itemimages/chess4.gif'],
 ];
 
-const App = () => (
-	<div id="preact_root">
-		<ButtonRow title="Stats" buttons={statPockets} />
-		<ButtonRow title="Fights" buttons={fightPockets} />
-		<ButtonRow title="Bell Fights" buttons={bellPockets} />
-		<ButtonRow title="Buffs" buttons={buffPockets} />
-		<ButtonRow title="Items" buttons={itemPockets} />
-		<ButtonRow title="Chess Pieces" buttons={chessPockets} />
-	</div>
-)
+const App = () => {
+	let [ashProperties, setAshProperties] = useState(null);
+	// eslint-disable-next-line no-undef
+	useEffect(() => setAshProperties(globalAshProperties), []);
+	return (
+		<div id="preact_root">
+			<PropertiesContext.Provider value={ashProperties}>
+				<ButtonRow title="Stats" buttons={statPockets} />
+				<ButtonRow title="Fights" buttons={fightPockets} />
+				<ButtonRow title="Bell Fights" buttons={bellPockets} />
+				<ButtonRow title="Buffs" buttons={buffPockets} />
+				<ButtonRow title="Items" buttons={itemPockets} />
+				<ButtonRow title="Chess Pieces" buttons={chessPockets} />
+			</PropertiesContext.Provider>
+		</div>
+	);
+};
 
 export default App;

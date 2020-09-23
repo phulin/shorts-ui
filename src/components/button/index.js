@@ -1,6 +1,8 @@
 import { h } from 'preact';
 import cx from 'classnames';
+import PropertiesContext from '../properties-context';
 import style from './style.css';
+import { useContext } from 'preact/hooks';
 
 const handlePocket = (event) => {
 	event.preventDefault();
@@ -12,17 +14,15 @@ const handlePocket = (event) => {
 }
 
 const Button = ({ pocket, image, title, subtitle }) => {
-	let pockets = [];
-	if (typeof ashProperties !== 'undefined') {
-		pockets = ashProperties.cargoPocketsEmptied.split(',').map((p) => parseInt(p, 10));
-	}
-	const pocketEmptied = ashProperties._cargoPocketEmptied == 'true';
+	const ashProperties = useContext(PropertiesContext);
+	const pockets = ashProperties?.cargoPocketsEmptied;
+	const pocketEmptied = ashProperties?._cargoPocketEmptied == 'true';
 	return (
 		<button
 			onClick={handlePocket}
 			data-pocket={pocket}
 			title={`Pocket ${pocket}`}
-			disabled={pockets.includes(pocket)}
+			disabled={pockets?.includes(pocket)}
 			class={cx(style.btn, !pocketEmptied && style['btn-hoverable'])}
 		>
 			<img src={image} />
