@@ -1,4 +1,5 @@
 import { h } from 'preact';
+import cx from 'classnames';
 import style from './style.css';
 
 const handlePocket = (event) => {
@@ -15,8 +16,15 @@ const Button = ({ pocket, image, title, subtitle }) => {
 	if (typeof ashProperties !== 'undefined') {
 		pockets = ashProperties.cargoPocketsEmptied.split(',').map((p) => parseInt(p, 10));
 	}
+	const pocketEmptied = ashProperties._cargoPocketEmptied == 'true';
 	return (
-		<button onClick={handlePocket} data-pocket={pocket} title={`Pocket ${pocket}`} disabled={pockets.includes(pocket)} class={style.btn}>
+		<button
+			onClick={handlePocket}
+			data-pocket={pocket}
+			title={`Pocket ${pocket}`}
+			disabled={pockets.includes(pocket)}
+			class={cx(style.btn, !pocketEmptied && style['btn-hoverable'])}
+		>
 			<img src={image} />
 			<div>
 				{title}
