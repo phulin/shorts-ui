@@ -22,8 +22,8 @@ const Button = ({ pocket, image, title, subtitle }) => {
 			onClick={handlePocket}
 			data-pocket={pocket}
 			title={`Pocket ${pocket}`}
-			disabled={pockets?.includes(pocket)}
-			class={cx(style.btn, !pocketEmptied && style['btn-hoverable'])}
+			disabled={pocketEmptied || pockets?.includes(pocket)}
+			class={cx(style.btn, pockets?.includes(pocket) && style['btn-grey'])}
 		>
 			<img src={image} />
 			<div>
