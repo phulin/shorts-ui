@@ -22,7 +22,12 @@ export default (config) => {
                 context: `${__dirname}`,
                 from: 'shorts-ui.ash',
                 to: `${__dirname}/build/relay/shorts-ui`,
-            }
+            },
+            {
+                context: `${__dirname}`,
+                from: 'dependencies.txt',
+                to: `${__dirname}/build`,
+            },
         ]),
     );
 };
