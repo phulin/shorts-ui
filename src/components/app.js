@@ -59,6 +59,9 @@ const App = () => {
 	let [ashProperties, setAshProperties] = useState(null);
 	// eslint-disable-next-line no-undef
 	useEffect(() => setAshProperties(globalAshProperties), []);
+	const localItemPockets = ashProperties?.lastUsername?.toLowerCase() !== 'accodorian' ? itemPockets : [...itemPockets,
+		['Jumbo olive', 'Oil of slipperiness', 570, '/images/itemimages/olive.gif'],
+	];
 	return (
 		<div id="preact_root">
 			<PropertiesContext.Provider value={ashProperties}>
@@ -66,7 +69,7 @@ const App = () => {
 				<ButtonRow title="Fights" buttons={fightPockets} />
 				<ButtonRow title="Bell Fights" buttons={bellPockets} />
 				<ButtonRow title="Buffs" buttons={buffPockets} />
-				<ButtonRow title="Items" buttons={itemPockets} />
+				<ButtonRow title="Items" buttons={localItemPockets} />
 				<ButtonRow title="Chess Pieces" buttons={chessPockets} />
 			</PropertiesContext.Provider>
 		</div>

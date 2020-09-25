@@ -1,4 +1,4 @@
-string[int] properties = { "cargoPocketsEmptied", "_cargoPocketEmptied" };
+string[int] properties = { "cargoPocketsEmptied", "_cargoPocketEmptied", "lastUsername" };
 
 void handle_shorts_ui(buffer page_text) {
     string body_snippet;
