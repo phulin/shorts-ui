@@ -31,6 +31,10 @@
 }
 
 .btn:not(.btn-grey):disabled {
+    color: black;
+}
+
+.btn:not(.btn-grey):disabled small {
     color: #444;
 }
 

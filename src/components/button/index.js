@@ -15,15 +15,16 @@ const handlePocket = (event) => {
 
 const Button = ({ pocket, image, title, subtitle }) => {
 	const ashProperties = useContext(PropertiesContext);
-	const pockets = ashProperties?.cargoPocketsEmptied;
+	const pockets = ashProperties?.cargoPocketsEmptied?.split(',')?.map((s) => parseInt(s.trim(), 10));
+	const pocketInt = parseInt(pocket, 10);
 	const pocketEmptied = ashProperties?._cargoPocketEmptied == 'true';
 	return (
 		<button
 			onClick={handlePocket}
-			data-pocket={pocket}
-			title={`Pocket ${pocket}`}
-			disabled={pocketEmptied || pockets?.includes(pocket)}
-			class={cx(style.btn, pockets?.includes(pocket) && style['btn-grey'])}
+			data-pocket={pocketInt}
+			title={`Pocket ${pocketInt}`}
+			disabled={pocketEmptied || pockets?.includes(pocketInt)}
+			class={cx(style.btn, pockets?.includes(pocketInt) && style['btn-grey'])}
 		>
 			<img src={image} />
 			<div>
