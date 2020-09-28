@@ -23,6 +23,7 @@ const skinflute = ['Skinflute', '2 stars/lines, olfact', 383, '/images/adventure
 
 const bellPockets = [
 	['Sizzling desk bell', 'YR source', 517, '/images/adventureimages/ccs_daughter.gif'],
+	['Frost-rimed desk bell', 'Cold wads, nuggets, powder', 587, '/images/adventureimages/ccs_herald.gif'],
 	['Uncanny desk bell', '3 eldritch effluvium', 590, '/images/adventureimages/ccs_tentacle.gif'],
 	['Nasty desk bell', 'Goat cheese, milk', 653, '/images/adventureimages/ccs_disciple.gif'],
 	['Greasy desk bell', 'Star chart, 2 stars/lines', 533, '/images/adventureimages/ccs_astrologer.gif'],
@@ -56,27 +57,68 @@ const chessPockets = [
 	['Alabaster king', '', 523, '/images/itemimages/chess4.gif'],
 ];
 
+const yegPockets = [
+	['alarm clock', 'Potion', 121, '/images/itemimages/yeg_clock.gif'],
+	['ashtray', 'Combat Item', 409, '/images/itemimages/yeg_ashtray.gif'],
+	['disposable razor', 'Combat Item', 322, '/images/itemimages/yeg_razor.gif'],
+	['hand soap', 'Potion', 177, '/images/itemimages/yeg_soap.gif'],
+	['minibar key', 'Gives random booze', 660, '/images/itemimages/yeg_key.gif'],
+	['mouthwash', 'Potion', 26, '/images/itemimages/yeg_mouthwash.gif'],
+	['pillow mint', 'Food', 439, '/images/itemimages/yeg_mint.gif'],
+	['sewing kit', 'Full HP restore', 642, '/images/itemimages/yeg_sewingkit.gif'],
+	['stationery', 'Hearty messages', 130, '/images/itemimages/yeg_stationery.gif'],
+	['toothbrush', 'Potion', 284, '/images/itemimages/yeg_toothbrush.gif'],
+];
+
+const aftercoreItemPockets = [
+	['flask of moonshine', 'Booze', 324, '/images/itemimages/flask.gif'],
+	['cursed piece of thirteen', 'Meat or fight scary pirate', 600, '/images/itemimages/pieceof13.gif'],
+	['candy crayons', 'Increased stat from food', 87, '/images/itemimages/candycrayons.gif'],
+	['dubious peppermint', 'Makes numberwang', 627, '/images/itemimages/candy.gif'],
+	['worst candy', '+10% combat', 548, '/images/itemimages/confused.gif'],
+	['handful of honey', 'Makes honey gear', 28, '/images/itemimages/honeyglob.gif'],
+	['chocolate seal-clubbing club', '+adv for Seal Clubbers', 381, '/images/itemimages/choc1.gif'],
+	['chocolate turtle totem', '+adv for Turtle Tamers', 477, '/images/itemimages/choc2.gif'],
+	['chocolate pasta spoon', '+adv for Pastamancers', 654, '/images/itemimages/choc3.gif'],
+	['chocolate saucepan', '+adv for Saucerors', 438, '/images/itemimages/choc4.gif'],
+	['chocolate disco ball', '+adv for Disco Bandits', 430, '/images/itemimages/choc5.gif'],
+	['chocolate stolen accordion', '+adv for Accordion Thieves', 189, '/images/itemimages/choc6.gif'],
+];
+
 const App = () => {
 	let [ashProperties, setAshProperties] = useState(null);
 	// eslint-disable-next-line no-undef
 	useEffect(() => setAshProperties(globalAshProperties), []);
-	const localItemPockets = ashProperties?.lastUsername?.toLowerCase() !== 'accodorian' ? itemPockets : [...itemPockets,
-		['Jumbo olive', 'Oil of slipperiness', 570, '/images/itemimages/olive.gif'],
-	];
-	const ascensions = ashProperties?.knownAscensions ?? 0;
-	const localFightPockets = [...fightPockets, ascensions % 2 == 0 ? skinflute : camelsToe];
-	return (
-		<div id="preact_root">
-			<PropertiesContext.Provider value={ashProperties}>
-				<ButtonRow title="Stats" buttons={statPockets} />
-				<ButtonRow title="Fights" buttons={localFightPockets} />
-				<ButtonRow title="Bell Fights" buttons={bellPockets} />
-				<ButtonRow title="Buffs" buttons={buffPockets} />
-				<ButtonRow title="Items" buttons={localItemPockets} />
-				<ButtonRow title="Chess Pieces" buttons={chessPockets} />
-			</PropertiesContext.Provider>
-		</div>
-	);
+	if (ashProperties?.inAftercore === "true") {
+		return (
+			<div id="preact_root">
+				<PropertiesContext.Provider value={ashProperties}>
+					<ButtonRow title="Bells" buttons={bellPockets} />
+					<ButtonRow title="Chess Pieces" buttons={chessPockets} />
+					<ButtonRow title="Yeg's Stuff" buttons={yegPockets} />
+					<ButtonRow title="Other Items" buttons={aftercoreItemPockets} />
+				</PropertiesContext.Provider>
+			</div>
+		);
+	} else {
+		const localItemPockets = ashProperties?.lastUsername?.toLowerCase() !== 'accodorian' ? itemPockets : [...itemPockets,
+			['Jumbo olive', 'Oil of slipperiness', 570, '/images/itemimages/olive.gif'],
+		];
+		const ascensions = ashProperties?.knownAscensions ?? 0;
+		const localFightPockets = [...fightPockets, ascensions % 2 == 0 ? skinflute : camelsToe];
+		return (
+			<div id="preact_root">
+				<PropertiesContext.Provider value={ashProperties}>
+					<ButtonRow title="Stats" buttons={statPockets} />
+					<ButtonRow title="Fights" buttons={localFightPockets} />
+					<ButtonRow title="Bell Fights" buttons={bellPockets.splice(1, 0)} />
+					<ButtonRow title="Buffs" buttons={buffPockets} />
+					<ButtonRow title="Items" buttons={localItemPockets} />
+					<ButtonRow title="Chess Pieces" buttons={chessPockets} />
+				</PropertiesContext.Provider>
+			</div>
+		);
+	}
 };
 
 export default App;

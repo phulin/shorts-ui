@@ -28,6 +28,7 @@ void handle_shorts_ui(buffer page_text) {
 
     string[string] property_values;
     foreach i, prop in properties property_values[prop] = get_property(prop);
+    property_values["inAftercore"] = can_interact();
     script_snippet += `<script type="text/javascript">var globalAshProperties = {property_values.to_json()};</script>`;
 
     matcher m_pockets = create_matcher("You've already opened ([0-9]+ of them)", page_text);
