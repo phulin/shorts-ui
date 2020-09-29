@@ -23,7 +23,6 @@ const skinflute = ['Skinflute', '2 stars/lines, olfact', 383, '/images/adventure
 
 const bellPockets = [
 	['Sizzling desk bell', 'YR source', 517, '/images/adventureimages/ccs_daughter.gif'],
-	['Frost-rimed desk bell', 'Cold wads, nuggets, powder', 587, '/images/adventureimages/ccs_herald.gif'],
 	['Uncanny desk bell', '3 eldritch effluvium', 590, '/images/adventureimages/ccs_tentacle.gif'],
 	['Nasty desk bell', 'Goat cheese, milk', 653, '/images/adventureimages/ccs_disciple.gif'],
 	['Greasy desk bell', 'Star chart, 2 stars/lines', 533, '/images/adventureimages/ccs_astrologer.gif'],
@@ -90,6 +89,9 @@ const App = () => {
 	// eslint-disable-next-line no-undef
 	useEffect(() => setAshProperties(globalAshProperties), []);
 	if (ashProperties?.inAftercore === "true") {
+		bellPockets.splice(1, 0, 
+			['Frost-rimed desk bell', 'Cold wads, nuggets, powder', 587, '/images/adventureimages/ccs_herald.gif']
+		)
 		return (
 			<div id="preact_root">
 				<PropertiesContext.Provider value={ashProperties}>
@@ -106,14 +108,12 @@ const App = () => {
 	];
 	const ascensions = ashProperties?.knownAscensions ?? 0;
 	const localFightPockets = [...fightPockets, ascensions % 2 == 0 ? skinflute : camelsToe];
-	const inRunBellPockets = bellPockets.splice();
-	inRunBellPockets.splice(1, 1)
 	return (
 		<div id="preact_root">
 			<PropertiesContext.Provider value={ashProperties}>
 				<ButtonRow title="Stats" buttons={statPockets} />
 				<ButtonRow title="Fights" buttons={localFightPockets} />
-				<ButtonRow title="Bell Fights" buttons={inRunBellPockets} />
+				<ButtonRow title="Bell Fights" buttons={bellPockets} />
 				<ButtonRow title="Buffs" buttons={buffPockets} />
 				<ButtonRow title="Items" buttons={localItemPockets} />
 				<ButtonRow title="Chess Pieces" buttons={chessPockets} />
