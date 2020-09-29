@@ -100,25 +100,24 @@ const App = () => {
 				</PropertiesContext.Provider>
 			</div>
 		);
-	} else {
-		const localItemPockets = ashProperties?.lastUsername?.toLowerCase() !== 'accodorian' ? itemPockets : [...itemPockets,
-			['Jumbo olive', 'Oil of slipperiness', 570, '/images/itemimages/olive.gif'],
-		];
-		const ascensions = ashProperties?.knownAscensions ?? 0;
-		const localFightPockets = [...fightPockets, ascensions % 2 == 0 ? skinflute : camelsToe];
-		return (
-			<div id="preact_root">
-				<PropertiesContext.Provider value={ashProperties}>
-					<ButtonRow title="Stats" buttons={statPockets} />
-					<ButtonRow title="Fights" buttons={localFightPockets} />
-					<ButtonRow title="Bell Fights" buttons={bellPockets.splice(1, 0)} />
-					<ButtonRow title="Buffs" buttons={buffPockets} />
-					<ButtonRow title="Items" buttons={localItemPockets} />
-					<ButtonRow title="Chess Pieces" buttons={chessPockets} />
-				</PropertiesContext.Provider>
-			</div>
-		);
-	}
+	} 
+	const localItemPockets = ashProperties?.lastUsername?.toLowerCase() !== 'accodorian' ? itemPockets : [...itemPockets,
+		['Jumbo olive', 'Oil of slipperiness', 570, '/images/itemimages/olive.gif'],
+	];
+	const ascensions = ashProperties?.knownAscensions ?? 0;
+	const localFightPockets = [...fightPockets, ascensions % 2 == 0 ? skinflute : camelsToe];
+	return (
+		<div id="preact_root">
+			<PropertiesContext.Provider value={ashProperties}>
+				<ButtonRow title="Stats" buttons={statPockets} />
+				<ButtonRow title="Fights" buttons={localFightPockets} />
+				<ButtonRow title="Bell Fights" buttons={bellPockets.splice(1, 0)} />
+				<ButtonRow title="Buffs" buttons={buffPockets} />
+				<ButtonRow title="Items" buttons={localItemPockets} />
+				<ButtonRow title="Chess Pieces" buttons={chessPockets} />
+			</PropertiesContext.Provider>
+		</div>
+	);
 };
 
 export default App;
